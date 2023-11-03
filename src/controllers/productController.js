@@ -12,18 +12,20 @@ module.exports = {
     },
     async cadastraProduto(req, res){
         const { nome , descricao } = req.body;
+        console.log("passou no req.body");
         try{
-            const product = await database("produtos").select("*").where({nome}).first();
-            if(produto){
-                throw new Error("Produto ja cadastrado");
+            console.log("entrou no try");
+            const product = await database("produtos").select("*").where({nome});
+            if(product != null){
+                return res.json({"message":"produto ja existe!"});
             }
-            const success = await database("produtos").insert({
-                nome,
-                descricao
-            })
-            if(success){
-                return res.json({"message":"Produto cadastrado com sucesso"});
-            }
+            console.log("passou aqui cadastra");
+            const newProduct = {
+                nome: nome,
+                descricao: descricao,
+            };
+            await database("produtos").insert(newProduct);
+            return res.json({"message" : "produto cadastrado com sucesso"});
         }catch(error){
             return res.json(error);
         }
