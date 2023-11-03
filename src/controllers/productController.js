@@ -3,7 +3,7 @@ const database = require('./../database/index.js');
 module.exports = {
     async findAll(req, res){
         try{
-            const products = database("produtos").select("*");
+            const products = await database("produtos").select("*");
             console.log("passou aqui");
             return res.json(products);
         }catch(error){
@@ -13,7 +13,7 @@ module.exports = {
     async cadastraProduto(req, res){
         const { nome , descricao } = req.body;
         try{
-            const product = database("produtos").select("*").where({nome}).first();
+            const product = await database("produtos").select("*").where({nome}).first();
             if(produto){
                 throw new Error("Produto ja cadastrado");
             }
@@ -45,7 +45,7 @@ module.exports = {
     async deletaProduto(req, res){
         const { id } = req.query;
         try{
-            const validProduct = database("produtos").select("*").where({id});
+            const validProduct = await database("produtos").select("*").where({id});
             if(!validProduct){
                 throw new Error("Produto não existe!");
             }
