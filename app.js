@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
+const router = require('./routes.js');
 
 app.use(express.json());
 app.use(express.urlencoded());
-
+app.use(router);
 
 
 
