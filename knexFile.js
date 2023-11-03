@@ -2,12 +2,12 @@ const knexConfiguration = {
   development:{
       client: 'mysql',
       connection: {
+        database : 'ieeevents',
         version: '8.0.28',
-        host : 'localhost',
+        host : '127.0.0.1',
         port : 3306,
         user : 'root',
-        password : 'ieeevents',
-        database : 'ieeevents'
+        password : 'ieeevents'
       },
       migrations: {
         tableName: 'migrations',

@@ -4,7 +4,7 @@ module.exports = {
     async findAll(req, res){
         try{
             const products = database("produtos").select("*");
-            console.log("passou aq");
+            console.log("passou aqui");
             return res.json(products);
         }catch(error){
             return res.json(error);
